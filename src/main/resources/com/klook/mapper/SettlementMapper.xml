@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.klook.mapper.SettlementMapper">
+	<select id="selectSettlement" resultType="com.klook.vo.SettlementVO">
+		SELECT c.*, d.kp_name AS product_name FROM
+		(
+			SELECT a.*, b.km_email AS email
+			FROM kl_settlement a
+			INNER JOIN 
+			kl_member b
+			ON a.ks_member_seq = b.km_seq
+		)c 
+		INNER JOIN kl_product d
+		ON c.ks_prod_seq = d.kp_seq
+	</select>
+	<delete id="deleteSettlement">
+		DELETE FROM kl_settlement WHERE ks_seq = #{seq}
+	</delete>
+	<select id="selectSettlementBySeq" resultType="com.klook.vo.SettlementVO">
+		SELECT * FROM kl_settlement WHERE ks_seq = #{seq}
+	</select>
+</mapper>

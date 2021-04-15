@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.klook.mapper.ProductMapper">
+	<insert id="insertProduct" useGeneratedKeys="true" keyProperty="kp_seq"> 
+		INSERT INTO kl_product(
+			kp_name,
+			kp_price,
+			kp_description,
+			kp_discount,
+			kp_discount_rate,
+			kp_point,
+			kp_point_rate,
+			kp_city_seq,
+			kp_mc_seq,
+			kp_sc_seq,
+			kp_pimg_seq
+		)VALUES(
+			#{kp_name},
+			#{kp_price},
+			#{kp_description},
+			#{kp_discount},
+			#{kp_discount_rate},
+			#{kp_point},
+			#{kp_point_rate},
+			#{kp_city_seq},
+			#{kp_mc_seq},
+			#{kp_sc_seq},
+			#{kp_pimg_seq}
+		)
+	</insert>
+	<select id="selectProducts" resultType="com.klook.vo.ProductVO">
+		SELECT e.*, f.kc_name AS city_name FROM
+		(
+		SELECT c.*, d.kmc_name AS main_category_name FROM
+		(
+			SELECT a.*, b.ksc_name AS sub_category_name
+			FROM kl_product a
+			INNER JOIN 
+			kl_sub_category b
+			ON a.kp_sc_seq = b.ksc_seq
+		)c 
+		INNER JOIN kl_main_category d
+		ON c.kp_mc_seq = d.kmc_seq
+		)e
+		INNER JOIN kl_city f
+		ON e.kp_city_seq = f.kc_seq
+		
+		<if test="(main_cate_seq != 0 and main_cate_seq != null) and (sub_cate_seq == null or sub_cate_seq == 0)">
+			WHERE kp_mc_seq = #{main_cate_seq}
+			<if test="keyword != null">
+				AND kp_name LIKE #{keyword}
+			</if>
+		</if>
+		
+		<if test="(sub_cate_seq != 0 and sub_cate_seq != null) and (main_cate_seq == null or main_cate_seq == 0)">
+			WHERE kp_sc_seq = #{sub_cate_seq}
+			<if test="keyword != null">
+				AND kp_name LIKE #{keyword}
+			</if>
+		</if>
+		
+		<!-- 		둘 다 설정이 된 상태  -->
+		<if test="(sub_cate_seq != 0 and sub_cate_seq != null) and (main_cate_seq != null and main_cate_seq != 0)">
+			WHERE kp_mc_seq = #{main_cate_seq} AND kp_sc_seq = #{sub_cate_seq}
+			<if test="keyword != null">
+				AND kp_name LIKE #{keyword}
+			</if>
+		</if>
+		
+		<!-- 		둘 다 설정이 안 된 상태  -->
+		<if test="(sub_cate_seq == 0 or sub_cate_seq == null) and (main_cate_seq == 0 or main_cate_seq == null)">
+			<if test="keyword != null">
+				WHERE kp_name LIKE #{keyword}
+			</if>
+		</if> 
+	</select>
+	<delete id="deleteProduct">
+		DELETE FROM kl_product WHERE kp_seq = #{seq}
+	</delete>
+	<select id="selectProductBySeq" resultType="com.klook.vo.ProductVO">
+		SELECT * FROM kl_product WHERE kp_seq = #{seq}
+	</select>
+	<update id="updateProduct">
+		UPDATE kl_product 
+		SET
+			kp_name=#{kp_name},
+			kp_price=#{kp_price},
+			kp_description=#{kp_description},
+			kp_discount=#{kp_discount},
+			kp_discount_rate=#{kp_discount_rate},
+			kp_point=#{kp_point},
+			kp_point_rate=#{kp_point_rate},
+			kp_city_seq=#{kp_city_seq},
+			kp_mc_seq=#{kp_mc_seq},
+			kp_sc_seq=#{kp_sc_seq},
+			kp_pimg_seq=#{kp_pimg_seq}
+		WHERE kp_seq=#{kp_seq}
+	</update>
+</mapper>

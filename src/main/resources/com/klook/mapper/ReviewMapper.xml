@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.klook.mapper.ReviewMapper">
+	<select id="selectReviews" resultType="com.klook.vo.ReviewVO">
+		SELECT c.*, d.kp_name AS product_name FROM
+		(
+			SELECT a.*, b.km_name AS member_name
+			FROM kl_review a
+			INNER JOIN 
+			kl_member b
+			ON a.kr_member_seq = b.km_seq
+		)c 
+		INNER JOIN kl_product d
+		ON c.kr_prod_seq = d.kp_seq
+	</select>
+	<delete id="deleteProduct">
+		DELETE FROM kl_review WHERE kr_seq = #{seq}
+	</delete>
+	<select id="selectProductBySeq" resultType="com.klook.vo.ProductVO">
+		SELECT * FROM kl_review WHERE kr_seq = #{seq}
+	</select>
+</mapper>

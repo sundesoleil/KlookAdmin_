@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.klook.mapper.MemberMapper">
+	<select id="loginMember" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM kl_member
+		WHERE km_email=#{email} AND km_pwd=#{pwd}
+	</select>
+	<select id="selectMembers" resultType="com.klook.vo.MemberVO">
+		SELECT * FROM kl_member 
+		ORDER BY km_reg_date DESC
+		LIMIT 10 OFFSET #{offset}
+	</select>
+	<select id="selectMemberCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM kl_member
+	</select>
+	<delete id="deleteMemberInfo">
+		DELETE from kl_member
+		WHERE km_seq=#{seq}
+	</delete>
+</mapper>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.klook.mapper.BookingMapper">
+	<select id="selectBookingBySeq" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM kl_booking WHERE kb_seq=#{seq}
+	</select>
+	<select id="selectBookings" resultType="com.klook.vo.BookingVO">
+		SELECT * FROM kl_booking
+		ORDER BY kb_book_date DESC
+		LIMIT 10  
+	</select>
+	<select id="selectBookingCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM kl_booking
+	</select>
+	<delete id="deleteBooking">
+		DELETE FROM kl_booking
+		WHERE kb_seq=#{seq}
+	</delete>
+</mapper>

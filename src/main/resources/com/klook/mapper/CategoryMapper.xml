@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.klook.mapper.CategoryMapper">
+	<insert id="insertMainCategory">
+		INSERT INTO kl_main_category(kmc_name) VALUES(#{name})
+	</insert>
+	<select id="selectMainCategoryByName" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM kl_main_category WHERE kmc_name=#{name}
+	</select>
+	<select id="selectMainCategories" resultType="com.klook.vo.CategoryVO">
+		SELECT * FROM kl_main_category
+	</select>
+	<delete id="deleteMainCategory">
+		DELETE FROM kl_main_category
+		WHERE kmc_seq=#{seq}
+	</delete>
+	<update id="updateMainCategory">
+		UPDATE kl_main_category
+		SET kmc_name=#{kmc_name}
+		WHERE kmc_seq=#{kmc_seq}
+	</update>
+	<insert id="insertSubCategory">
+		INSERT INTO kl_sub_category(
+			ksc_name,
+			ksc_mc_seq
+		)VALUES(
+			#{ksc_name},
+			#{ksc_mc_seq}
+			)
+	</insert>
+	<select id="selectSubCategories" resultType="com.klook.vo.CategoryVO">
+		SELECT a.*, b.kmc_name AS category_name
+		FROM kl_sub_category a
+		INNER JOIN 
+		kl_main_category b
+		ON a.ksc_mc_seq = b.kmc_seq
+	</select>
+	<select id="selectSubCategoryBySeq" resultType="com.klook.vo.CategoryVO">
+		SELECT * FROM kl_sub_category WHERE ksc_seq = #{seq}
+	</select>
+	<update id="updateSubCategory">
+		UPDATE kl_sub_category
+		SET
+		ksc_name=#{ksc_name},
+		ksc_mc_seq=#{ksc_mc_seq}
+		WHERE 
+		ksc_seq=#{ksc_seq}
+	</update>
+	<delete id="deleteSubCategory">
+		DELETE FROM kl_sub_category
+		WHERE ksc_seq = #{seq}
+	</delete>
+</mapper>

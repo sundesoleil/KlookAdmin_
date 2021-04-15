@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.klook.mapper.CityMapper">
+	<insert id="insertCity">
+		INSERT INTO kl_city(kc_name) VALUES(#{name})
+	</insert>
+	<select id="selectCityByName" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM kl_city WHERE kc_name=#{name}
+	</select>
+	<select id="selectCities" resultType="com.klook.vo.CityVO">
+		SELECT * FROM kl_city
+	</select>
+	<delete id="deleteCity">
+		DELETE FROM kl_city
+		WHERE kc_seq=#{seq}
+	</delete>
+	<update id="updateCity">
+		UPDATE kl_city
+		SET kc_name=#{kc_name}
+		WHERE kc_seq=#{kc_seq}
+	</update>
+</mapper>
