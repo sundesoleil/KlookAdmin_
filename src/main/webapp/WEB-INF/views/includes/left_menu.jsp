@@ -21,10 +21,6 @@
 			let menu_num = "${menu_num}";
 			$(".menu a").eq(menu_num).addClass("current");
 		})
-		
-	<%--<c:if test="${user == null}">
-			location.href="/";
-		</c:if>--%>
 	</script> 
 </head>
 <body>
@@ -32,20 +28,21 @@
 			<a href="/products" id="logo">
 				<img src="/resources/images/logo.JPEG" />
 			</a>
-			<%-- <c:if test="${user != null }">
+	<%-- 		<div class="login_area">
+			<c:if test="${user != null }">
 				<div class="user_menu">
 					<span>${user }</span>
 					<a href="/logout">로그아웃</a>
 				</div>
-			</c:if>  --%>
+			</c:if>
+			</div> --%>
 			<div class="menu">
 				<a href="/products"><i class="fas fa-box"></i>상품관리</a>
 				<a href="/main_category"><i class="fas fa-tags"></i>카테고리(대)</a>
 				<a href="/sub_category"><i class="fas fa-tag"></i>카테고리(소)</a>
 				<a href="/city"><i class="fas fa-city"></i>도시관리</a>
-				<a href="/booking"><i class="fas fa-book"></i>예약관리</a>
 				<a href="/review"><i class="fas fa-feather-alt"></i>리뷰관리</a>
-				<a href="/settlement"><i class="fas fa-hand-holding-usd"></i>결제관리</a>
+				<a href="/settlement"><i class="fas fa-hand-holding-usd"></i>예약(결제)관리</a>
 				<a href="/member"><i class="fas fa-users"></i>회원관리</a>
 			</div>
 		</div>

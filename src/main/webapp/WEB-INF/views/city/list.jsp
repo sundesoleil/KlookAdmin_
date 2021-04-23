@@ -30,7 +30,7 @@
 					<div>NO</div>
 					<div>도시명</div>
 					<div>등록일</div>
-					<div>상품수</div>
+				<!-- 	<div>상품수</div> -->
 					<div>수정</div>
 					<div>삭제</div>
 				</div>
@@ -42,7 +42,7 @@
 							<div class="item_reg_date">
 								<fmt:formatDate value="${item.kc_reg_date}" pattern="yyyy-MM-dd HH:mm" />
 							</div>
-							<div class="item_count">123</div>
+						<!-- 	<div class="item_count">0</div> -->
 							<div class="item_modify">
 								<button type="button" class="modify_btn">수정</button>
 							</div>
@@ -61,11 +61,7 @@
 					<p>도시명</p>
 					<input type="text" id="category_name" name="category_name" placeholder="카테고리 명을 입력하세요"/>
 				</div>
-				<p class="item_title">상품 이미지</p>
-				<form id="prod_img_form">
-					<span class="prev_img"></span>
-					<input type="file" name="file" accept=".jpg, .png, .jpeg, .webp "/>
-				</form>
+
 				<div class="input_row" id="buttons">
 					<button id="save">저장</button>
 					<button id="modify">수정</button>

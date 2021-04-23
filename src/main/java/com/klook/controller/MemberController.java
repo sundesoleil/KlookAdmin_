@@ -25,7 +25,7 @@ public class MemberController {
 		List<MemberVO> memberList = service.selectMembers(offset);
 		
 		model.addAttribute("memberList", memberList);
-		model.addAttribute("menu_num", 7);
+		model.addAttribute("menu_num", 6);
 		
 		return "/member/list";
 	}

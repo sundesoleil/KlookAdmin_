@@ -14,4 +14,5 @@ public interface ProductMapper {
 	public void deleteProduct(Integer seq);
 	public ProductVO selectProductBySeq(Integer seq);
 	public void updateProduct(ProductVO vo);
+	public Integer selectProdByCity(Integer seq);
 }

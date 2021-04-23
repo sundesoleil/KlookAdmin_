@@ -53,7 +53,7 @@
 					<div class="member_seq">${settlement.ks_seq }</div>
 					<div>${settlement.email }</div>
 					<div>${settlement.product_name }</div>
-					<div>${settlement.ks_method }</div>
+					<div>카드</div>
 					<div>${settlement.ks_amount }</div>
 					<div><fmt:formatDate value="${settlement.ks_pay_date }" pattern="yyyy-MM-dd HH:mm" /></div>
 					<a href="#" class="delete"><i class="fas fa-trash"></i></a>

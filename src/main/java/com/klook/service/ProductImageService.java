@@ -6,6 +6,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.Calendar;
 import java.util.LinkedHashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.klook.mapper.ProductImageMapper;
+import com.klook.vo.ProductDetailImageVO;
 import com.klook.vo.ProductImageVO;
 import com.klook.vo.ProductVO;
 
@@ -61,11 +63,20 @@ public class ProductImageService {
 		return resultMap;
 	}
 	
-	public Resource getProductImage(String fileName) throws Exception{
+	public Resource getProductImage(String fileName, String filePath) throws Exception{
 		ProductImageVO vo = mapper.selectProductImage(fileName);
-		Path prodImageLocation = Paths.get("/klook/product_img");
+		Path prodImageLocation = Paths.get(filePath);
 		Path prodImagePath = prodImageLocation.resolve(vo.getKpi_path()).normalize();
 		Resource resource = new UrlResource(prodImagePath.toUri());
 		return resource;
+	}
+	public void insertProdDetailImage(ProductDetailImageVO vo) {
+		mapper.insertProdDetailImage(vo);
+	}
+	public List<ProductDetailImageVO> selectProdDetailImages(Integer seq){
+		return mapper.selectProdDetailImages(seq);
+	}
+	public void deleteProdDetailImage(String uri) {
+		mapper.deleteProdDetailImage(uri);
 	}
 }

@@ -100,57 +100,68 @@
 				<i class="fas fa-box"></i>
 				<span>상품추가</span>
 			</h1>
-			<p class="item_title">상품이름</p>
-			<input type="text" id="prod_name"/>
-			<p class="item_title">상세설명</p>
-			<input type="text" id="prod_description"/>
-			<div class="cate_brand_area">
-				<div class="category">
-					<p class="item_title">도시</p> 
-					<select id="prod_city">
-						<option value="1">카테고리1</option>
-						<option value="2">카테고리2</option>
-						<option value="3">카테고리3</option>
-					</select>
-				</div>
-				<div class="category">
-					<p class="item_title">카테고리(대)</p>
-					<select id="prod_main_category">
-						<option value="1">카테고리1</option>
-						<option value="2">카테고리2</option>
-						<option value="3">카테고리3</option>
-					</select>
-				</div>
-				<div class="category">
-					<p class="item_title">카테고리(소)</p>
-					<select id="prod_sub_category">
-						<option value="1">카테고리1</option>
-						<option value="2">카테고리2</option>
-						<option value="3">카테고리3</option>
-					</select>
-				</div>
-		</div>
-		<div class="price_wrap">
-			<div class="price_area">
-				<p class="item_title">가격</p>
-				<input type="number" id="prod_price" />
+			<div class="modal_left">
+				<p class="item_title">상품이름</p>
+				<input type="text" id="prod_name"/>
+				<p class="item_title">상세설명</p>
+				<input type="text" id="prod_description"/>
+				<div class="cate_brand_area">
+					<div class="category">
+						<p class="item_title">도시</p> 
+						<select id="prod_city">
+							<option value="1">카테고리1</option>
+							<option value="2">카테고리2</option>
+							<option value="3">카테고리3</option>
+						</select>
+					</div>
+					<div class="category">
+						<p class="item_title">카테고리(대)</p>
+						<select id="prod_main_category">
+							<option value="1">카테고리1</option>
+							<option value="2">카테고리2</option>
+							<option value="3">카테고리3</option>
+						</select>
+					</div>
+					<div class="category">
+						<p class="item_title">카테고리(소)</p>
+						<select id="prod_sub_category">
+							<option value="1">카테고리1</option>
+							<option value="2">카테고리2</option>
+							<option value="3">카테고리3</option>
+						</select>
+					</div>
 			</div>
-			<div class="discount_area">
-				<p class="item_title">할인</p>
-				<input type="checkbox" id="prod_discount" />
-				<input type="number" id="prod_discount_value" />
+			<div class="price_wrap">
+				<div class="price_area">
+					<p class="item_title">가격</p>
+					<input type="number" id="prod_price" />
 				</div>
-				<div class="point_area">
-					<p class="item_title">포인트</p>
-					<input type="checkbox" id="prod_point" />
-					<input type="number" id="prod_point_value" />
+				<div class="discount_area">
+					<p class="item_title">할인</p>
+					<input type="checkbox" id="prod_discount" />
+					<input type="number" id="prod_discount_value" />
+					</div>
+					<div class="point_area">
+						<p class="item_title">포인트</p>
+						<input type="checkbox" id="prod_point" />
+						<input type="number" id="prod_point_value" />
+					</div>
 				</div>
 			</div>
-			<p class="item_title">상품 이미지</p>
-			<form id="prod_img_form">
-				<span class="prev_img"></span>
-				<input type="file" name="file" accept=".jpg, .png, .jpeg, .webp "/>
-			</form>
+			<div class="modal_right">
+				<p class="item_title">대표 이미지</p>
+				<form id="prod_img_form">
+					<span class="prev_img"></span>
+					<input type="file" name="file" accept=".jpg, .png, .jpeg, .webp "/>
+				</form>
+	<!-- 			<p class="item_title">상품 상세 이미지</p>
+				<form id="prod_detail_img_form">
+				<div class="img_file_list">
+					
+				</div>
+					<button id="img_add" type="button">이미지 추가</button>
+				</form> -->
+			</div>
 			<div class="button_area">
 				<button id="save">저장</button>
 				<button id="modify">수정</button>

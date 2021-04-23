@@ -20,6 +20,33 @@ $(function(){
 					alert(data.message);
 					location.reload();
 				}
+/*			$.ajax({
+			url:"/api/insert_city?name=" + $("#category_name").val(),
+			type:"get",
+			success:function(data){
+				let form = $("#prod_img_form");
+				let formData = new FormData(form[0]);
+				$.ajax({
+					url:"/city_img/" + data.city_seq + "?city="+ $("#category_name").val() + 
+					"&name="+$("#prod_name").val(),
+					type:"put",
+					data:formData,
+					contentType:false,
+					processData:false,
+					success:function(){
+						alert("도시가 추가되었습니다.");
+						$(".prod_insert_modal").hide();
+			
+						},
+						error:function(){
+							alert("에러");
+					}
+				})
+	},
+	error:function(){
+		alert("에러");
+	}
+	})*/
 			},
 			error:function(){
 				alert("에러");
@@ -55,7 +82,7 @@ $(function(){
 		let name = $(this).parent().parent().find(".item_name").html();
 		window.originalName = name;
 		
-		$("#modify").prop("disabled",true);
+		//$("#modify").prop("disabled",true);
 		$(".category_add_modal").addClass("open");
 		$("#save").hide();
 		$("#modify").show();
@@ -69,13 +96,27 @@ $(function(){
 			return;
 	
 		$.ajax({
-				url:"/city/" + window.modify_seq + "?name=" + $("#category_name").val(),
-				type:"patch",
-				success:function(data){
-					alert(data.message);
-					if(data.status == 'success'){
-						location.reload();
-					}
+		url:"/city/" + window.modify_seq + "?name=" + $("#category_name").val(),
+		type:"patch",
+		success:function(data){
+			alert(data.message);
+			if(data.status == 'success'){
+				location.reload();
+			}
+			let form = $("#prod_img_form");
+		let formData = new FormData(form[0]);
+		
+		$.ajax({
+			url:"/product_img/" + data.kp_seq + "?city=" + $("#category_name").val() +
+			"&name="+ $("#category_name").val() ,
+			type:"put",
+			data:formData,
+			contentType:false,
+			processData:false,
+			success:function(){
+				console.log("이미지 전송 끝");
+			}
+		})
 				},
 				error:function(){
 					alert("에러");
@@ -83,7 +124,7 @@ $(function(){
 		})
 
 	})
-	$("#category_name").on("input", function(){
+/*	$("#category_name").on("input", function(){
 		console.log($("#category_name").val());
 		if(window.originalName == $("#category_name").val() || $("#category_name").val() == ''){
 			$("#modify").prop("disabled", true);
@@ -91,5 +132,5 @@ $(function(){
 		else{
 			$("#modify").prop("disabled", false);
 		}
-	})
+	})*/
 })

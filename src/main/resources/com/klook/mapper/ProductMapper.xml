@@ -96,4 +96,9 @@
 			kp_pimg_seq=#{kp_pimg_seq}
 		WHERE kp_seq=#{kp_seq}
 	</update>
+		<select id="selectProdByCity" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM 
+		kl_product 
+		WHERE kp_city_seq = #{seq}
+	</select>
 </mapper>

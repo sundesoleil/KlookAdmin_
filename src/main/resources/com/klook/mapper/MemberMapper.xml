@@ -3,7 +3,7 @@
 <mapper namespace="com.klook.mapper.MemberMapper">
 	<select id="loginMember" resultType="java.lang.Integer">
 		SELECT COUNT(*) FROM kl_member
-		WHERE km_email=#{email} AND km_pwd=#{pwd}
+		WHERE km_email=#{email} AND km_pwd=#{pwd} AND km_seq=#{seq}
 	</select>
 	<select id="selectMembers" resultType="com.klook.vo.MemberVO">
 		SELECT * FROM kl_member 

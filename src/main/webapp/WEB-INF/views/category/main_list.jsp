@@ -30,7 +30,7 @@
 					<div>NO</div>
 					<div>카테고리명</div>
 					<div>등록일</div>
-					<div>상품수</div>
+				<!-- 	<div>상품수</div> -->
 					<div>수정</div>
 					<div>삭제</div>
 				</div>
@@ -42,7 +42,7 @@
 							<div class="item_reg_date">
 								<fmt:formatDate value="${item.kmc_reg_date}" pattern="yyyy-MM-dd HH:mm" />
 							</div>
-							<div class="item_count">123</div>
+					<!-- 		<div class="item_count">123</div> -->
 							<div class="item_modify">
 								<button type="button" class="modify_btn">수정</button>
 							</div>

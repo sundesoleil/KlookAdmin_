@@ -23,4 +23,19 @@
 		ORDER BY kpi_seq
 		DESC LIMIT 1
 	</select> 
+	<insert id="insertProdDetailImage">
+		INSERT INTO kl_prod_detail_img(
+		kpdi_uri, kpdi_path, kpdi_prod_seq
+		)VALUES(
+		#{kpdi_uri},#{kpdi_path},#{kpdi_prod_seq}
+		)
+	</insert>
+	<select id="selectProdDetailImages" resultType="com.klook.vo.ProductDetailImageVO">
+		SELECT * FROM kl_prod_detail_img 
+		WHERE kpdi_prod_seq = #{seq}
+	</select>
+	<delete id="deleteProdDetailImage">
+		DELETE FROM kl_prod_detail_img
+		WHERE kpdi_uri = #{uri}
+	</delete>
 </mapper>

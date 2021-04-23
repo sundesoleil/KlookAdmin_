@@ -15,6 +15,13 @@
 	color: #434343;
 	font-weight:400;
 }
+.login_area{
+	padding: 30px;
+	color: #eee;
+}
+.user_menu a{
+	text-decoration: none;
+}
 .left_side .menu a i{
 	width:30px;
 	display:inline-block;

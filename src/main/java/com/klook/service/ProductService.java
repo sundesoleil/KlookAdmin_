@@ -45,4 +45,7 @@ public class ProductService {
 	public void updateProduct(ProductVO vo) {
 		mapper.updateProduct(vo);
 	}
+	public Integer selectProdByCity(Integer seq) {
+		return mapper.selectProdByCity(seq);
+	}
 }

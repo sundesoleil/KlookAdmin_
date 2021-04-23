@@ -17,4 +17,5 @@ public class ReviewVO {
 	private Integer kr_prod_seq;
 	private String member_name;
 	private String product_name;
+	private Integer no;
 }

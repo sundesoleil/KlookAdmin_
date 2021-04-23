@@ -1,5 +1,6 @@
 // products.js
 $(function(){
+	window.removeList = new Array();
 	$("#product_add").click(function(){
 		modalReset();
 		$(".prod_insert_modal").show();
@@ -76,8 +77,25 @@ $(function(){
 						alert("제품이 추가되었습니다.");
 						$(".prod_insert_modal").hide();
 						location.reload();
+		/*				if($("#prod_detail_img_form input").length != 0){
+							let formData = new FormData($("#prod_detail_img_form")[0]);
+							$.ajax({
+								url:"/product_img_detail"+ data.prod_seq + "?city=" + $("#prod_city option:selected").html() +
+								"&name="+$("#prod_name").val(),
+								type:"put",
+								data:formData,
+								contentType:false,
+								processData:false,
+								success:function(){
+									alert("저장됨");
+									location.reload();
+								}
+							
+							})
+						}*/
 				}
 				})
+
 				
 			},
 			error:function(){
@@ -99,6 +117,7 @@ $(function(){
 			url:"/product/" + seq,
 			type:"delete",
 			success: (data) => {
+				
 				alert(data.message);
 				location.reload();
 			}
@@ -133,6 +152,23 @@ $(function(){
 				}else{
 					$(".prev_img").html("이미지 없음");
 				}
+				
+				$(".img_file_list").html("");
+				for(let i=0; i<data.detailImgs.length; i++){
+					$(".img_file_list").append(
+					'<div class="detail_file">'+
+						'<span>'+data.detailImgs[i].kpdi_uri+'</span>'+
+						'<input type="file" name="imgs_files">'+
+						'<button class="detail_img_delete" type="button">&times;</button>'+
+					'</div>'
+					);
+				}
+			
+			$(".detail_img_delete").click(function(){
+				window.removeList.push($(this).parent().find("span").html());
+				console.log(window.removeList);
+				$(this).parent().remove();
+			})
 				
 			$.ajax({
 			url:"/city_list",
@@ -185,6 +221,7 @@ $(function(){
 	
 	$("#modify").click(function(){
 		if(!confirm("수정하시겠습니까?"))return;
+		
 		let data = {
 		
 		  "kp_seq":$(this).attr("data-seq"),
@@ -221,8 +258,27 @@ $(function(){
 			contentType:"application/json",
 			data:JSON.stringify(data),
 			success:function(data){
-				alert(data.message);
-				location.reload();
+/*				if(window.removeList.length > 0){
+					let param = "";
+					window.removeList.forEach(uri => {
+						param += uri;
+						param += ",";
+					});
+					param = param.substr(0, param.length - 1);
+					alert(param);
+					$.ajax({
+						url:"/product_detail_img?uris=" + param,
+						type:"delete",
+						success:function(data){
+							alert(data.message);
+							location.reload();
+						}
+					})
+				}
+				else{*/
+					alert(data.message);
+					location.reload();
+	/*			}*/
 			},
 			error:function(e){
 				console.log(e);
@@ -240,7 +296,18 @@ $(function(){
 		$("#prod_point").val("checked", false);
 		$("#prod_point_value").val("");
 		$("#prod_img_form > input").val("");
+		window.removeList = new Array();
 	}
 	$(".modal_content").draggable();
+	
+	$("#img_add").click(function(){
+		$(".img_file_list").append(
+			'<div class="detail_file">'+
+				'<span></span>'+
+				'<input type="file" name="imgs_files">'+
+				'<button class="detail_img_delete" type="button">&times;</button>'+
+			'</div>'
+		);
 	})
+})
 

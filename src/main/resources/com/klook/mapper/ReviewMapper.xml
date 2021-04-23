@@ -12,11 +12,28 @@
 		)c 
 		INNER JOIN kl_product d
 		ON c.kr_prod_seq = d.kp_seq
+		<if test="type == 'title' ">
+			WHERE kr_title LIKE #{keyword}
+		</if>
+		<if test="type == 'content' ">
+			AND kr_content LIKE #{keyword}
+		</if>
+		ORDER BY kr_reg_date DESC
+		LIMIT 10 OFFSET #{offset}
 	</select>
-	<delete id="deleteProduct">
+	<select id="selectReviewCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM kl_review
+		<if test="type == 'title' ">
+			WHERE kr_title LIKE #{keyword}
+		</if>
+		<if test="type == 'content' ">
+			AND kr_content LIKE #{keyword}
+		</if>
+	</select>
+	<delete id="deleteReview">
 		DELETE FROM kl_review WHERE kr_seq = #{seq}
 	</delete>
-	<select id="selectProductBySeq" resultType="com.klook.vo.ProductVO">
+	<select id="selectReviewBySeq" resultType="com.klook.vo.ReviewVO">
 		SELECT * FROM kl_review WHERE kr_seq = #{seq}
 	</select>
 </mapper>

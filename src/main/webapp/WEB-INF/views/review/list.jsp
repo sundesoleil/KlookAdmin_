@@ -16,7 +16,7 @@
 	
 	<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js" integrity="sha512-uto9mlQzrs59VwILcLiRYeLKPPbS/bT71da/OEBYEwcdNUk8jYIy+D176RYoop1Da+f9mvkYrmj5MCLZWEtQuA==" crossorigin="anonymous"></script>
-	<script src="/resources/js/member_list.js"></script>
+	<script src="/resources/js/review.js"></script>
 </head>
 <body>
 	<%@include file="/WEB-INF/views/includes/left_menu.jsp" %>
@@ -29,13 +29,16 @@
 				<span>~</span>
 				<input type="text" id="endDate" autocomplete="off"/>
 			</div>
+			
 			<div class="search_keyword">
-				<select id="target">
-					<option value="1">이름</option>
-					<option value="2">상품명</option>
+			<form action="/review">
+				<select id="target" name="type">
+					<option value="title">제목</option>
+					<option value="content">내용</option>
 				</select>
-				<input type="text" id="keyword" />
+				<input type="text" id="keyword_search" name="keyword" />
 				<button id="search">검색</button>
+			</form>
 			</div>
 		</div>
 		<div class="member_contents">
@@ -58,7 +61,7 @@
 					<div>${review.kr_title }</div>
 					<div>${review.kr_content }</div>
 					<div><fmt:formatDate value="${review.kr_reg_date }" pattern="yyyy-MM-dd HH:mm" /></div>
-					<a href="#" class="delete"><i class="fas fa-trash"></i></a>
+					<a href="#" class="delete" data-seq="${review.kr_seq }"><i class="fas fa-trash"></i></a>
 				</div>
 				</c:forEach>
 			</div>

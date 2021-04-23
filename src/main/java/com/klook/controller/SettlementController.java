@@ -17,7 +17,7 @@ public class SettlementController {
 	
 	@GetMapping("/settlement")
 	public String getSettlement(Model model) {
-		model.addAttribute("menu_num",6);
+		model.addAttribute("menu_num", 5);
 		List<SettlementVO> settlementList = service.selectSettlement(null);
 		
 		model.addAttribute("settlementList", settlementList);

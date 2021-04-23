@@ -1,18 +1,20 @@
 package com.klook.api;
 
+
+import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.List;
+
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.klook.service.ReviewService;
-import com.klook.vo.CategoryVO;
-import com.klook.vo.ProductVO;
 import com.klook.vo.ReviewVO;
 
 @RestController
@@ -31,6 +33,19 @@ public class ReviewAPIController {
 		
 		return resultMap;
 	}
+	@GetMapping("/review_cnt")
+	public Map<String, Integer> getReviewCnt(
+			@RequestParam @Nullable String keyword,
+			@RequestParam @Nullable String type
+			){
+		if(keyword == null) keyword = "%%";
+		else keyword = "%"+keyword+"%";
+		Map<String, Integer> resultMap = new HashMap<String, Integer>();
+		Integer count = service.selectReviewCount(keyword, type);
+		resultMap.put("count", count);
+		return resultMap;
+	}
+	
 	@GetMapping("/review/{seq}")
 	public Map<String, Object> getReview(@PathVariable Integer seq){
 		
