@@ -16,4 +16,5 @@ public class SettlementVO {
 	private Integer ks_prod_seq;
 	private String email;
 	private String product_name;
+	private Integer no;
 }

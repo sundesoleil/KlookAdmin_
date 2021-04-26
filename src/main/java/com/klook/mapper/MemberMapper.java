@@ -10,7 +10,7 @@ import com.klook.vo.MemberVO;
 @Mapper
 public interface MemberMapper {
 	public Integer loginMember(LoginVO vo);
-	public List<MemberVO> selectMembers(Integer offset);
-	public Integer selectMemberCount();
+	public List<MemberVO> selectMembers(Integer offset, String keyword, String type);
+	public Integer selectMemberCount(String keyword, String type);
 	public void deleteMemberInfo(Integer seq);
 }

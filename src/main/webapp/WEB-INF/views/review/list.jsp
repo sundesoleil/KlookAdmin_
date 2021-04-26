@@ -23,13 +23,6 @@
 	<div class="wrap">
 		<h1><i class="fas fa-feather-alt"></i>리뷰관리</h1>
 		<div class="search_area">
-			<div class="search_date">
-				<span>리뷰등록일</span>
-				<input type="text" id="startDate" autocomplete="off"/>
-				<span>~</span>
-				<input type="text" id="endDate" autocomplete="off"/>
-			</div>
-			
 			<div class="search_keyword">
 			<form action="/review">
 				<select id="target" name="type">

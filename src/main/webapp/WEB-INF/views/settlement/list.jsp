@@ -23,20 +23,17 @@
 	<div class="wrap">
 		<h1><i class="fas fa-hand-holding-usd"></i>결제관리</h1>
 		<div class="search_area">
-			<div class="search_date">
-				<span>결제일</span>
-				<input type="text" id="startDate" autocomplete="off"/>
-				<span>~</span>
-				<input type="text" id="endDate" autocomplete="off"/>
-			</div>
 			<div class="search_keyword">
-				<select id="target">
-					<option value="1">결제번호</option>
-					<option value="2">회원이름</option>
-				</select>
-				<input type="text" id="keyword" />
-				<button id="search">검색</button>
+				<form action="/settlement">
+					<select id="target" name="type">
+						<option value="number">결제번호</option>
+						<option value="email">이메일</option>
+					</select>
+					<input type="text" id="keyword_search" name="keyword" />
+					<button id="search">검색</button>
+				</form>
 			</div>
+
 		</div>
 		<div class="member_contents">
 			<div class="contents_header">

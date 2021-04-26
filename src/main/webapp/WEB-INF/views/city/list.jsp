@@ -18,10 +18,6 @@
 			<div class="header_area">
 				<h1><i class="fas fa-city"></i>도시 관리</h1>
 				<div class="header_right">
-					<div class="search_box">
-						<input type="text" id="search_keyword" />
-						<img src="/resources/images/DM_20210324195650_057.PNG" />
-					</div>
 					<button id="add_category"><i class="fas fa-city"></i> 도시 추가</button>
 				</div>
 			</div>
@@ -30,7 +26,6 @@
 					<div>NO</div>
 					<div>도시명</div>
 					<div>등록일</div>
-				<!-- 	<div>상품수</div> -->
 					<div>수정</div>
 					<div>삭제</div>
 				</div>
@@ -42,7 +37,6 @@
 							<div class="item_reg_date">
 								<fmt:formatDate value="${item.kc_reg_date}" pattern="yyyy-MM-dd HH:mm" />
 							</div>
-						<!-- 	<div class="item_count">0</div> -->
 							<div class="item_modify">
 								<button type="button" class="modify_btn">수정</button>
 							</div>

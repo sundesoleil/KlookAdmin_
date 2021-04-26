@@ -1,12 +1,15 @@
 package com.klook.api;
 
+import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.klook.service.SettlementService;
@@ -28,6 +31,19 @@ public class SettlementAPIController {
 		
 		return resultMap;
 	}
+	@GetMapping("/settlement_cnt")
+	public Map<String, Integer> getSettlementCnt(
+			@RequestParam @Nullable String keyword,
+			@RequestParam @Nullable String type
+			){
+		if(keyword == null) keyword = "%%";
+		else keyword = "%"+keyword+"%";
+		Map<String, Integer> resultMap = new HashMap<String, Integer>();
+		Integer count = service.selectSettlementCount(keyword, type);
+		resultMap.put("count", count);
+		return resultMap;
+	}
+	
 	@GetMapping("/settlement/{seq}")
 	public Map<String, Object> getSettlement(@PathVariable Integer seq){
 		

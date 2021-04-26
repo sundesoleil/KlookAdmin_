@@ -21,6 +21,9 @@
 			let menu_num = "${menu_num}";
 			$(".menu a").eq(menu_num).addClass("current");
 		})
+		<c:if test="${user == null}">
+			location.href="/";
+		</c:if>
 	</script> 
 </head>
 <body>
@@ -28,14 +31,14 @@
 			<a href="/products" id="logo">
 				<img src="/resources/images/logo.JPEG" />
 			</a>
-	<%-- 		<div class="login_area">
-			<c:if test="${user != null }">
-				<div class="user_menu">
-					<span>${user }</span>
-					<a href="/logout">로그아웃</a>
-				</div>
-			</c:if>
-			</div> --%>
+			<div class="login_area">
+				<c:if test="${user != null }">
+					<div class="user_menu">
+						<p>${user}</p>
+						<a href="/logout">로그아웃</a>
+					</div>
+				</c:if>
+			</div>
 			<div class="menu">
 				<a href="/products"><i class="fas fa-box"></i>상품관리</a>
 				<a href="/main_category"><i class="fas fa-tags"></i>카테고리(대)</a>

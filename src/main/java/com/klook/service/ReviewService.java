@@ -15,7 +15,6 @@ public class ReviewService {
 	
 	public List<ReviewVO> selectReviews(Integer offset, String keyword, String type){
 		
-		//offset = offset * 10;
 		List<ReviewVO> reviewList = mapper.selectReviews(offset, keyword, type);
 		
 		Integer total = this.selectReviewCount("%%", null);

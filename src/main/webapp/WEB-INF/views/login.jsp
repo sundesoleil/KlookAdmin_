@@ -15,12 +15,11 @@
 	<link rel="stylesheet" href="/resources/css/reset.css" />
 	<link rel="stylesheet" href="/resources/css/login.css" />
 	<script src="http://code.jquery.com/jquery-3.4.1.min.js"></script>
-	<script src="/resources/js/login.js"></script>
-<!-- 	<script>
-		<c:if test="${user != null}">
+	<script src="/resources/js/login.js"></script><script>
+		<c:if test="${admin != null}">
 			location.href="/products";
 		</c:if>
-	</script> -->
+	</script>
 </head>
 <body>
 	<div class="login_box">

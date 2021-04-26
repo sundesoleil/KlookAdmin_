@@ -18,11 +18,21 @@ public class MemberController {
 	MemberService service;
 	
 	@GetMapping("/member")
-	public String getMember(Model model, @RequestParam @Nullable Integer offset) {
-		if(offset == null) {
-			offset = 0;
+	public String getMember(
+			@RequestParam @Nullable Integer offset,
+			Model model, 
+			@RequestParam @Nullable String keyword,
+			@RequestParam @Nullable String type) {
+		
+		if(offset == null) offset = 0;
+		if(keyword == null) {
+			keyword = "%%";
+		}else {
+			keyword = "%"+keyword+"%";
 		}
-		List<MemberVO> memberList = service.selectMembers(offset);
+		if(type == null) type = "name";
+		
+		List<MemberVO> memberList = service.selectMembers(offset, keyword, type);
 		
 		model.addAttribute("memberList", memberList);
 		model.addAttribute("menu_num", 6);

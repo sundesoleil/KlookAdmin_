@@ -12,6 +12,23 @@
 		)c 
 		INNER JOIN kl_product d
 		ON c.ks_prod_seq = d.kp_seq
+		<if test="type == 'number' ">
+			WHERE ks_seq LIKE #{keyword}
+		</if>
+		<if test="type == 'email' ">
+			AND email LIKE #{keyword}
+		</if>
+		ORDER BY ks_pay_date DESC
+		LIMIT 10 OFFSET #{offset}
+	</select>
+	<select id="selectSettlementCount" resultType="java.lang.Integer">
+		SELECT COUNT(*) FROM kl_settlement
+		<if test="type == 'number' ">
+			WHERE ks_seq LIKE #{keyword}
+		</if>
+		<if test="type == 'email' ">
+			AND ks_email LIKE #{keyword}
+		</if>
 	</select>
 	<delete id="deleteSettlement">
 		DELETE FROM kl_settlement WHERE ks_seq = #{seq}

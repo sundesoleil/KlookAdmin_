@@ -8,7 +8,8 @@ import com.klook.vo.SettlementVO;
 
 @Mapper
 public interface SettlementMapper {
-	public List<SettlementVO> selectSettlement();
+	public List<SettlementVO> selectSettlement(Integer offset, String keyword, String type);
+	public Integer selectSettlementCount(String keyword, String type);
 	public void deleteSettlement(Integer seq);
 	public SettlementVO selectSettlementBySeq(Integer seq);
 }

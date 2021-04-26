@@ -22,10 +22,6 @@
 		<div class="right_side">
 			<div class="right_side_header">
 				<h1><i class="fas fa-box"></i>상품관리</h1>
-				<div class="search_box">
-					<input type="text" />
-					<img src="/resources/images/DM_20210324195650_057.PNG" />
-				</div>
 				<button id="product_add"><i class="fas fa-box"></i> 상품추가</button>
 			</div>
 			<div class="product_list">
@@ -154,13 +150,12 @@
 					<span class="prev_img"></span>
 					<input type="file" name="file" accept=".jpg, .png, .jpeg, .webp "/>
 				</form>
-	<!-- 			<p class="item_title">상품 상세 이미지</p>
+				<p class="item_title">상품 상세 이미지</p>
 				<form id="prod_detail_img_form">
-				<div class="img_file_list">
-					
-				</div>
-					<button id="img_add" type="button">이미지 추가</button>
-				</form> -->
+					<div class="img_file_list">
+					</div>
+						<button id="img_add" type="button">이미지 추가</button>
+				</form>
 			</div>
 			<div class="button_area">
 				<button id="save">저장</button>

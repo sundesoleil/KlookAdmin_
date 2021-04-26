@@ -2,7 +2,7 @@
 $(function(){
 	$("#login_btn").click(function(){
 		let data = {
-			id:$("#user_id").val(),
+			email:$("#user_id").val(),
 			pwd:$("#user_pwd").val()
 		}
 		$.ajax({
@@ -25,7 +25,7 @@ $(function(){
 	})
 	$("#user_pwd").keydown(function(e){
 		if(e.keyCode == 13){
-			$("#login").trigger("click");
+			$("#login_btn").trigger("click");
 		} 
 	})
 })

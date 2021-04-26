@@ -8,5 +8,4 @@ import lombok.Setter;
 public class LoginVO {
 	private String email;
 	private String pwd;
-	private Integer seq;
 }

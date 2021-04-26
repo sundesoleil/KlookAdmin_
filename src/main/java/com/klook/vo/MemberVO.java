@@ -16,4 +16,5 @@ public class MemberVO {
 	private Date km_reg_date;
 	private Integer km_terms_agree;
 	private Integer km_info_agree;
+	private Integer no;
 }

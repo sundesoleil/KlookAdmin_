@@ -15,14 +15,19 @@ public class MemberService {
 	MemberMapper mapper;
 	
 	public boolean loginMember(LoginVO vo) {
-		return mapper.loginMember(vo) != null;
+		return mapper.loginMember(vo) == 1;
 	}
-	public List<MemberVO> selectMembers(Integer offset){
-		offset = offset * 10;
-		return mapper.selectMembers(offset);
+	public List<MemberVO> selectMembers(Integer offset, String keyword, String type){
+		List<MemberVO> memberList = mapper.selectMembers(offset, keyword, type);
+		
+		Integer total = this.selectMemberCount("%%", null);
+		for(int i = 0; i < memberList.size(); i++) {
+			memberList.get(i).setNo(total-i-offset);
+		}
+		return memberList;
 	}
-	public Integer selectMemberCount() {
-		return mapper.selectMemberCount();
+	public Integer selectMemberCount(String keyword, String type) {
+		return mapper.selectMemberCount(keyword, type);
 	}
 	public void deleteMemberInfo(Integer seq) {
 		mapper.deleteMemberInfo(seq);

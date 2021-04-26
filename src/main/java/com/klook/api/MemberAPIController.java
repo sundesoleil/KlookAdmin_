@@ -7,17 +7,20 @@ import java.util.Map;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.klook.service.MemberService;
 import com.klook.utils.AESAlgorithm;
 import com.klook.vo.LoginVO;
+import com.klook.vo.MemberVO;
 
 @RestController
 public class MemberAPIController {
@@ -35,7 +38,7 @@ public class MemberAPIController {
 			e.printStackTrace();
 		}
 		vo.setPwd(pwd);
-		
+	
 		if(service.loginMember(vo)) {
 			resultMap.put("status", "success");
 			resultMap.put("message", "로그인 성공");
@@ -44,13 +47,23 @@ public class MemberAPIController {
 			resultMap.put("status", "failed");
 			resultMap.put("message", "관리자 전용 페이지입니다.");
 		}
+		
 
 		return resultMap;
 	}
 	@GetMapping("/member_cnt")
-	public Map<String, Integer> getMemberCnt(){
+	public Map<String, Integer> getMemberCnt(
+			@RequestParam @Nullable String keyword,
+			@RequestParam @Nullable String type){
+		if(keyword == null) {
+			keyword = "%%";
+		}
+		else {
+			keyword = "%" + keyword + "%";
+		}
 		Map<String, Integer> resultMap = new HashMap<String, Integer>();
-		resultMap.put("count", service.selectMemberCount());
+		Integer count = service.selectMemberCount(keyword, type);
+		resultMap.put("count", count);
 		return resultMap;
 	}
 	

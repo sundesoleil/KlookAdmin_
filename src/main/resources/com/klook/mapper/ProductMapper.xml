@@ -44,35 +44,6 @@
 		)e
 		INNER JOIN kl_city f
 		ON e.kp_city_seq = f.kc_seq
-		
-		<if test="(main_cate_seq != 0 and main_cate_seq != null) and (sub_cate_seq == null or sub_cate_seq == 0)">
-			WHERE kp_mc_seq = #{main_cate_seq}
-			<if test="keyword != null">
-				AND kp_name LIKE #{keyword}
-			</if>
-		</if>
-		
-		<if test="(sub_cate_seq != 0 and sub_cate_seq != null) and (main_cate_seq == null or main_cate_seq == 0)">
-			WHERE kp_sc_seq = #{sub_cate_seq}
-			<if test="keyword != null">
-				AND kp_name LIKE #{keyword}
-			</if>
-		</if>
-		
-		<!-- 		둘 다 설정이 된 상태  -->
-		<if test="(sub_cate_seq != 0 and sub_cate_seq != null) and (main_cate_seq != null and main_cate_seq != 0)">
-			WHERE kp_mc_seq = #{main_cate_seq} AND kp_sc_seq = #{sub_cate_seq}
-			<if test="keyword != null">
-				AND kp_name LIKE #{keyword}
-			</if>
-		</if>
-		
-		<!-- 		둘 다 설정이 안 된 상태  -->
-		<if test="(sub_cate_seq == 0 or sub_cate_seq == null) and (main_cate_seq == 0 or main_cate_seq == null)">
-			<if test="keyword != null">
-				WHERE kp_name LIKE #{keyword}
-			</if>
-		</if> 
 	</select>
 	<delete id="deleteProduct">
 		DELETE FROM kl_product WHERE kp_seq = #{seq}

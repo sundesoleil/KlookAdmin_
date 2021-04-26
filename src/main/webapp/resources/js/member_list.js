@@ -1,26 +1,17 @@
 /*member_list.js */
 $(function(){
-	$.datepicker.setDefaults({
-        dateFormat: 'yy-mm-dd',
-        prevText: '이전 달',
-        nextText: '다음 달',
-        monthNames: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        monthNamesShort: ['1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월', '10월', '11월', '12월'],
-        dayNames: ['일', '월', '화', '수', '목', '금', '토'],
-        dayNamesShort: ['일', '월', '화', '수', '목', '금', '토'],
-        dayNamesMin: ['일', '월', '화', '수', '목', '금', '토'],
-        showMonthAfterYear: true,
-        yearSuffix: '년'
-    });
-
-	$("#startDate, #endDate").datepicker();
+	$("#keyword_search").val(decodeURI(getParam("keyword"))); // 한글로 검색시 깨지지 않도록 설정
+	let type = decodeURI(getParam("type"));
 	
+	$("select option").prop("selected", false);
+	if(type == 'name') $("select option:nth-child(1)").prop("selected", true);
+
 	let offset = getParam("offset");
 	let curPage = Number(offset);
 	let pageCnt = 0;
 	
 	$.ajax({
-		url:"/member_cnt",
+		url:"/member_cnt?keyword=" + getParam("keyword") + "&type=" + type,
 		type:"get",
 		success:function(result){
 			pageCnt = Math.ceil(result.count/10);
@@ -36,10 +27,10 @@ $(function(){
 			for(let i=start; i < pageCnt; i++){
 				let template;
 				if(offset == i){
-					template ='<a href="/member?offset='+ i +'"class="current">'+(i+1)+'</a>';
+					template ='<a href="/member?offset='+ i + "&keyword=" + getParam("keyword") + "&type=" + type + '"class="current">'+(i+1)+'</a>';
 				}
 				else{
-					template ='<a href="/member?offset='+ i + '">'+(i+1)+'</a>';
+					template ='<a href="/member?offset='+ i + "&keyword=" + getParam("keyword") + "&type=" + type + '">'+(i+1)+'</a>';
 				}
 				$(".pagers").append(template);
 				if(i-start == 8){
@@ -53,22 +44,22 @@ $(function(){
 	$("#prev").click(function(){
 		let newOffset = Number(getParam("offset")) - 1;
 		if(newOffset < 0) return;
-		location.href="/member?offset=" + newOffset;
+		location.href="/member?offset=" + newOffset + "&keyword=" + getParam("keyword") + "&type=" + type;
 	})
 	$("#prev-10").click(function(){
 		let newOffset = Number(getParam("offset")) - 10;
 		if(newOffset < 0) newOffset = 0;
-		location.href="/member?offset=" + newOffset;
+		location.href="/member?offset=" + newOffset + "&keyword=" + getParam("keyword") + "&type=" + type;
 	})
 	$("#next").click(function(){
 		let newOffset = Number(getParam("offset")) + 1
 		if(newOffset > pageCnt - 1) return;
-		location.href="/member?offset=" + newOffset;
+		location.href="/member?offset=" + newOffset + "&keyword=" + getParam("keyword") + "&type=" + type;
 	})
 	$("#next-10").click(function(){
 		let newOffset = Number(getParam("offset")) + 10;
 		if(newOffset > pageCnt - 1) newOffset = pageCnt - 1;
-		location.href="/member?offset=" + newOffset;
+		location.href="/member?offset=" + newOffset + "&keyword=" + getParam("keyword") + "&type=" + type;
 	})
 
 		$(".delete").click(function(){

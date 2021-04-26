@@ -23,19 +23,14 @@
 	<div class="wrap">
 		<h1><i class="fas fa-users"></i>회원관리</h1>
 		<div class="search_area">
-			<div class="search_date">
-				<span>가입일</span>
-				<input type="text" id="startDate" autocomplete="off"/>
-				<span>~</span>
-				<input type="text" id="endDate" autocomplete="off"/>
-			</div>
 			<div class="search_keyword">
-				<select id="target">
-					<option value="1">이메일</option>
-					<option value="2">이름</option>
-				</select>
-				<input type="text" id="keyword" />
-				<button id="search">검색</button>
+				<form action="/member">
+					<select id="target" name="type">
+						<option value="name">이름</option>
+					</select>
+					<input type="text" id="keyword_search" name="keyword" />
+					<button id="search">검색</button>
+				</form>
 			</div>
 		</div>
 		<div class="member_contents">
